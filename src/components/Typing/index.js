@@ -8,16 +8,26 @@ const texts = [
 	"Жизнь - это то, что с тобой происходит, пока ты строишь планы",
 ];
 
-
 export const Typing = () => {
-	const sentence = texts[Math.floor(Math.random() * texts.length)]
-	const words = sentence.split(' ')
+	const sentence = texts[Math.floor(Math.random() * texts.length)];
+	const words = sentence.split(" ");
 	const [second, setSecond] = React.useState(20);
 	const [currenrWord, setCurrentWord] = React.useState(words[0]);
 	const [inputValue, setInputValue] = React.useState("");
 	const [wordCount, setWordCount] = React.useState(0);
+	const curIndexRef = React.useRef(0);
 
-	console.log(inputValue);
+	const OnChangeInput = (e) => {
+		const { value } = e.target;
+		setInputValue(e.target.value);
+
+		if (currenrWord === value) {
+			curIndexRef.current += 1;
+			setCurrentWord(words[curIndexRef.current]);
+			setInputValue('')
+			
+		}
+	};
 
 	return (
 		<div className='flex typing'>
@@ -26,12 +36,7 @@ export const Typing = () => {
 				{/* Slaves <span className='typing__man-sign'>📌</span> */}
 				{currenrWord}
 			</h3>
-			<input
-				type='text'
-				value={inputValue}
-				onChange={(e) => setInputValue(e.target.value)}
-				className='typing__input'
-			/>
+			<input type='text' value={inputValue} onChange={OnChangeInput} className='typing__input' />
 			<div className='typing__progress'>
 				<div className='typing__timer'>
 					<p>Осталось времени:</p>
