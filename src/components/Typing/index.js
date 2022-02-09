@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react/cjs/react.development";
 
 const texts = [
   "Что разум человека может постигнуть и во что он может поверить, того он способен достичь",
@@ -9,26 +10,37 @@ const texts = [
 ];
 
 const sentence = texts[Math.floor(Math.random() * texts.length)];
-const res = sentence.replace(/[^a-zа-яё\s]/gi, '');
+const res = sentence.replace(/[^a-zа-яё\s]/gi, "");
 const words = res.split(" ");
 
 export const Typing = () => {
+  const curIndexRef = React.useRef(0);
   const [second, setSecond] = React.useState(20);
   const [currenrWord, setCurrentWord] = React.useState(words[0]);
   const [inputValue, setInputValue] = React.useState("");
   const [wordCount, setWordCount] = React.useState(0);
-  const curIndexRef = React.useRef(0);
+  const [isError, setIsError] = React.useState(false);
 
-  console.log(res);
+  React.useEffect(() => {
+    setInterval(() => {
+      setSecond((prev) => prev - 1);
+    }, 1000);
+  }, []);
+
   const OnChangeInput = (e) => {
     const { value } = e.target;
 
-    if (currenrWord.toLowerCase() === value) {
+    if (currenrWord === value) {
       curIndexRef.current += 1;
       setCurrentWord(words[curIndexRef.current]);
       setInputValue("");
       setWordCount((prev) => prev + 1);
       return;
+    }
+    if (!new RegExp(`^${value}`).test(currenrWord)) {
+      setIsError(true);
+    } else {
+      setIsError(false);
     }
     setInputValue(e.target.value.trim());
   };
@@ -44,7 +56,7 @@ export const Typing = () => {
         type="text"
         value={inputValue}
         onChange={OnChangeInput}
-        className="typing__input"
+        className={`typing__input ${isError ? "error" : ""}`}
       />
       <div className="typing__progress">
         <div className="typing__timer">
