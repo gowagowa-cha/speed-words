@@ -8,24 +8,29 @@ const texts = [
   "Жизнь - это то, что с тобой происходит, пока ты строишь планы",
 ];
 
+const sentence = texts[Math.floor(Math.random() * texts.length)];
+const res = sentence.replace(/[^a-zа-яё\s]/gi, '');
+const words = res.split(" ");
+
 export const Typing = () => {
-  const sentence = texts[Math.floor(Math.random() * texts.length)];
-  const words = sentence.split(" ");
   const [second, setSecond] = React.useState(20);
   const [currenrWord, setCurrentWord] = React.useState(words[0]);
   const [inputValue, setInputValue] = React.useState("");
   const [wordCount, setWordCount] = React.useState(0);
   const curIndexRef = React.useRef(0);
 
+  console.log(res);
   const OnChangeInput = (e) => {
     const { value } = e.target;
-    setInputValue(e.target.value);
 
-    if (currenrWord === value) {
+    if (currenrWord.toLowerCase() === value) {
       curIndexRef.current += 1;
       setCurrentWord(words[curIndexRef.current]);
       setInputValue("");
+      setWordCount((prev) => prev + 1);
+      return;
     }
+    setInputValue(e.target.value.trim());
   };
 
   return (
