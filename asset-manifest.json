@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/speed-words/static/css/main.0f189ddb.css",
-    "main.js": "/speed-words/static/js/main.2bdd3c14.js",
+    "main.js": "/speed-words/static/js/main.ffb6f99e.js",
     "index.html": "/speed-words/index.html",
     "main.0f189ddb.css.map": "/speed-words/static/css/main.0f189ddb.css.map",
-    "main.2bdd3c14.js.map": "/speed-words/static/js/main.2bdd3c14.js.map"
+    "main.ffb6f99e.js.map": "/speed-words/static/js/main.ffb6f99e.js.map"
   },
   "entrypoints": [
     "static/css/main.0f189ddb.css",
-    "static/js/main.2bdd3c14.js"
+    "static/js/main.ffb6f99e.js"
   ]
 }
