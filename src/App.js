@@ -10,6 +10,9 @@ function App() {
     second: 0,
   });
 
+	const welcome = () => {
+		setStep('welcome')
+	}
   const startGame = () => {
     setStep("typing");
   };
@@ -25,7 +28,7 @@ function App() {
   const steps = {
     welcome: <Welcome onClickCart={startGame} />,
     typing: <Typing onFinish={finishGame} />,
-    result: <Result stats={stats} />,
+    result: <Result stats={stats} onClickCart={startGame} welcome={welcome}/>,
   };
   return (
     <div className="App">

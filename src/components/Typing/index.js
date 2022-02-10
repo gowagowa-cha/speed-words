@@ -1,10 +1,16 @@
 import React from "react";
 
 const texts = [
-  "Стремитесь не к успеху, а к своей",
   "Своим успехом я обязана тому, что никогда не оправдывалась и не принимала оправданий от других.",
   "Сложнее всего начать действовать, все остальное зависит только от упорства",
-  "Жизнь - это то, что с тобой происходит, пока ты строишь планы",
+  "Жизнь это то, что с тобой происходит, пока ты строишь планы",
+  "Наука это организованные знания, мудрость это организованная жизнь.",
+  "Вы никогда не пересечете океан, если не наберетесь мужества потерять берег из виду.",
+  "Свобода ничего не стоит, если она не включает в себя свободу ошибаться.",
+  "Если вы думаете, что на что-то способны, вы правы; если думаете, что у вас ничего не получится вы тоже правы.",
+  "Два самых важных дня в твоей жизни: день, когда ты появился на свет, и день, когда понял, зачем.",
+  "Начинайте делать все, что вы можете сделать и даже то, о чем можете хотя бы мечтать. В смелости гений, сила и магия.",
+  "Зачастую говорят, что мотивации хватает ненадолго. Но то же самое происходит и с освежающим душем, поэтому и рекомендуют его принимать ежедневно.",
 ];
 
 const sentence = texts[Math.floor(Math.random() * texts.length)];
@@ -14,7 +20,7 @@ const words = res.toLowerCase().split(" ");
 export const Typing = ({ onFinish }) => {
   const curIndexRef = React.useRef(0);
   const timerRef = React.useRef(null);
-  const [second, setSecond] = React.useState(20);
+  const [second, setSecond] = React.useState(3);
   const [currentWord, setCurrentWord] = React.useState(words[0]);
   const [inputValue, setInputValue] = React.useState("");
   const [wordCount, setWordCount] = React.useState(0);
@@ -26,7 +32,7 @@ export const Typing = ({ onFinish }) => {
         const value = prev - 1;
         if (!value) {
           clearInterval(timerRef.current);
-          onFinish(curIndexRef.current, 20 - value);
+          onFinish(curIndexRef.current, 60 - value);
         }
         return value;
       });
@@ -41,7 +47,7 @@ export const Typing = ({ onFinish }) => {
 
       if (curIndexRef.current >= words.length) {
         clearInterval(timerRef.current);
-        onFinish(curIndexRef.current, 20 - second);
+        onFinish(curIndexRef.current, 60 - second);
         return;
       }
       setCurrentWord(words[curIndexRef.current]);
@@ -61,9 +67,7 @@ export const Typing = ({ onFinish }) => {
   return (
     <div className="flex typing">
       <p className="typing__enter-word">Введите слово</p>
-      <h3 className="typing__word">
-        {currentWord}
-      </h3>
+      <h3 className="typing__word">{currentWord}</h3>
       <input
         type="text"
         value={inputValue}
