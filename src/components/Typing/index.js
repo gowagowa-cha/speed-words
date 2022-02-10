@@ -20,7 +20,7 @@ const words = res.toLowerCase().split(" ");
 export const Typing = ({ onFinish }) => {
   const curIndexRef = React.useRef(0);
   const timerRef = React.useRef(null);
-  const [second, setSecond] = React.useState(3);
+  const [second, setSecond] = React.useState(60);
   const [currentWord, setCurrentWord] = React.useState(words[0]);
   const [inputValue, setInputValue] = React.useState("");
   const [wordCount, setWordCount] = React.useState(0);
